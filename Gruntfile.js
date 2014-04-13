@@ -29,6 +29,11 @@ module.exports = function(grunt) {
         }
       }
     },
+    autoprefixer: {
+      no_dest_single: {
+          src: 'assets/css/main.min.css'
+      },
+    },
     uglify: {
       dist: {
         files: {
@@ -71,7 +76,7 @@ module.exports = function(grunt) {
           'assets/less/*.less',
           'assets/less/bootstrap/*.less'
         ],
-        tasks: ['less', 'version']
+        tasks: ['less', 'autoprefixer', 'version']
       },
       js: {
         files: [
@@ -104,16 +109,19 @@ module.exports = function(grunt) {
   // Load tasks
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-wp-version');
+
 
   // Register tasks
   grunt.registerTask('default', [
     'clean',
     'less',
     'uglify',
+    'autoprefixer',
     'version'
   ]);
   grunt.registerTask('dev', [
